@@ -27,7 +27,9 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Core Rules
 
-1. **Read the relevant doc first.** Never write code until you've read the applicable doc(s) in `/docs`.
+> **MANDATORY:** You MUST read every relevant file in `/docs` BEFORE writing a single line of code. No exceptions. Generating code without first reading the applicable doc(s) is a critical violation of these rules.
+
+1. **Read the relevant doc first — this is non-negotiable.** Never write, suggest, or scaffold any code until you have explicitly read the applicable doc(s) in `/docs` using a file-reading tool. If you are unsure which doc applies, read all of them.
 2. **Never downgrade dependencies.** The pinned versions in `package.json` are intentional.
 3. **App Router only.** Do not use the Pages Router. All routes live under `app/`.
 4. **Server Components by default.** Only add `"use client"` when browser APIs or React state/effects are required.
@@ -39,13 +41,14 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Documentation Index
 
-For detailed guidelines on specific topics, refer to the modular documentation in the `/docs` directory.
-ALWAYS refer to the relevant .md file BEFORE generating any code:
+> **STOP.** Before generating any code, you MUST open and read the relevant file(s) below using a file-reading tool. Do not rely on memory or prior training — the actual file contents are the source of truth. Reading these docs is a prerequisite, not a suggestion.
 
-| Topic | File |
-|---|---|
-| Authentication (Clerk) | [`docs/auth.md`](docs/auth.md) |
-| UI Components (shadcn/ui) | [`docs/ui.md`](docs/ui.md) |
+For detailed guidelines on specific topics, refer to the modular documentation in the `/docs` directory.
+
+| Topic | File | When to read |
+|---|---|---|
+| Authentication (Clerk) | [`docs/auth-instructions.md`](docs/auth-instructions.md) | Any auth, sign-in, sign-out, session, or user-related code |
+| UI Components (shadcn/ui) | [`docs/ui-instructions.md`](docs/ui-instructions.md) | Any component, layout, form, button, or UI-related code |
 
 ---
 
