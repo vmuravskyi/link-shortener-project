@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1777206669997,
+      "tag": "0000_bouncy_justice",
+      "breakpoints": true
+    }
+  ]
+}
