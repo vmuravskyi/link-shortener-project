@@ -1,15 +1,23 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
+const { clerkProviderMock } = vi.hoisted(() => ({
+    clerkProviderMock: vi.fn(),
+}));
+
 vi.mock("next/font/google", () => ({
     Geist: () => ({ variable: "font-geist-sans" }),
     Geist_Mono: () => ({ variable: "font-geist-mono" }),
 }));
 
 vi.mock("@clerk/nextjs", () => ({
-    ClerkProvider: ({ children }: { children: React.ReactNode }) => (
-        <div data-testid="clerk-provider">{children}</div>
-    ),
+    ClerkProvider: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => {
+        clerkProviderMock(props);
+
+        return (
+            <div data-testid="clerk-provider">{children}</div>
+        );
+    },
     SignInButton: ({ children }: { children: React.ReactNode }) => (
         <div data-testid="sign-in-button">{children}</div>
     ),
@@ -31,6 +39,8 @@ describe("RootLayout", () => {
     });
 
     it("renders auth controls and children within the layout shell", () => {
+        clerkProviderMock.mockReset();
+
         const layout = RootLayout({
             children: <main>Page Content</main>,
         });
@@ -42,6 +52,10 @@ describe("RootLayout", () => {
         render(layout.props.children.props.children);
 
         expect(screen.getByTestId("clerk-provider")).toBeInTheDocument();
+        expect(clerkProviderMock).toHaveBeenCalledWith({
+            signInFallbackRedirectUrl: "/dashboard",
+            signUpFallbackRedirectUrl: "/dashboard",
+        });
         expect(screen.getByTestId("sign-in-button")).toBeInTheDocument();
         expect(screen.getAllByTestId("sign-up-button")).toHaveLength(1);
         expect(screen.getByTestId("user-button")).toBeInTheDocument();

@@ -35,7 +35,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 4. **Server Components by default.** Only add `"use client"` when browser APIs or React state/effects are required.
 5. **TypeScript strict mode.** No `any`, no `// @ts-ignore` without a comment explaining why.
 6. **Tailwind for all styling.** No inline styles, no CSS Modules, no external CSS files beyond `app/globals.css`.
-7. **No orphan files.** Every new file must be imported and used somewhere — don't create scaffolding speculatively.
+7. **Never use `middleware.ts`.** In this project's Next.js version, `middleware.ts` is deprecated; use `proxy.ts` instead.
+8. **No orphan files.** Every new file must be imported and used somewhere — don't create scaffolding speculatively.
 
 ---
 
@@ -78,6 +79,7 @@ drizzle.config.ts     # drizzle-kit config
 - Every route segment is a folder under `app/` with a `page.tsx`.
 - Layouts inherit from the root `layout.tsx` which provides `ClerkProvider`.
 - Dynamic segments use `[param]` folder naming (e.g., `app/[slug]/page.tsx`).
+- Never add `middleware.ts`; use the root-level `proxy.ts` entry point for this kind of request handling.
 - Route handlers live in `app/api/` as `route.ts` files.
 
 ### Database
